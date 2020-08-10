@@ -14,13 +14,13 @@ import static com.codeborne.selenide.WebDriverRunner.*;
 
 public class lesson2_SomeTests {
 
-    // Проверка работа ссылок на сервисы Яндекса
+    // РџСЂРѕРІРµСЂРєР° СЂР°Р±РѕС‚Р° СЃСЃС‹Р»РѕРє РЅР° СЃРµСЂРІРёСЃС‹ РЇРЅРґРµРєСЃР°
     @Test
     void enterSomeYandexTabs() {
-        // Открыть страницу Яндекса
+        // РћС‚РєСЂС‹С‚СЊ СЃС‚СЂР°РЅРёС†Сѓ РЇРЅРґРµРєСЃР°
         open("https://yandex.ru/");
 
-        // Перейти на вкладку "Видео", проверить переход на нужный URL
+        // РџРµСЂРµР№С‚Рё РЅР° РІРєР»Р°РґРєСѓ "Р’РёРґРµРѕ", РїСЂРѕРІРµСЂРёС‚СЊ РїРµСЂРµС…РѕРґ РЅР° РЅСѓР¶РЅС‹Р№ URL
         $("[data-id=\"video\"]").click();
         switchTo().window(1);
         String url = getWebDriver().getCurrentUrl();
@@ -28,7 +28,7 @@ public class lesson2_SomeTests {
         WebDriverRunner.closeWindow();
         switchTo().window(0);
 
-        // Перейти на вкладку "Картинки", проверить переход на нужный URL
+        // РџРµСЂРµР№С‚Рё РЅР° РІРєР»Р°РґРєСѓ "РљР°СЂС‚РёРЅРєРё", РїСЂРѕРІРµСЂРёС‚СЊ РїРµСЂРµС…РѕРґ РЅР° РЅСѓР¶РЅС‹Р№ URL
         $("[data-id=\"images\"]").click();
         switchTo().window(1);
         url = getWebDriver().getCurrentUrl();
@@ -36,7 +36,7 @@ public class lesson2_SomeTests {
         WebDriverRunner.closeWindow();
         switchTo().window(0);
 
-        // Перейти на вкладку "Новости", проверить переход на нужный URL
+        // РџРµСЂРµР№С‚Рё РЅР° РІРєР»Р°РґРєСѓ "РќРѕРІРѕСЃС‚Рё", РїСЂРѕРІРµСЂРёС‚СЊ РїРµСЂРµС…РѕРґ РЅР° РЅСѓР¶РЅС‹Р№ URL
         $("[data-id=\"news\"]").click();
         switchTo().window(1);
         url = getWebDriver().getCurrentUrl();
@@ -45,7 +45,7 @@ public class lesson2_SomeTests {
         switchTo().window(0);
 
 
-        // Перейти на вкладку "Переводчик", проверить переход на нужный URL
+        // РџРµСЂРµР№С‚Рё РЅР° РІРєР»Р°РґРєСѓ "РџРµСЂРµРІРѕРґС‡РёРє", РїСЂРѕРІРµСЂРёС‚СЊ РїРµСЂРµС…РѕРґ РЅР° РЅСѓР¶РЅС‹Р№ URL
         $("[data-id=\"translate\"]").click();
         switchTo().window(1);
         url = getWebDriver().getCurrentUrl();
@@ -53,7 +53,7 @@ public class lesson2_SomeTests {
         WebDriverRunner.closeWindow();
         switchTo().window(0);
 
-        // Перейти на вкладку "Авто.ру", проверить переход на нужный URL
+        // РџРµСЂРµР№С‚Рё РЅР° РІРєР»Р°РґРєСѓ "РђРІС‚Рѕ.СЂСѓ", РїСЂРѕРІРµСЂРёС‚СЊ РїРµСЂРµС…РѕРґ РЅР° РЅСѓР¶РЅС‹Р№ URL
         $("[data-id=\"autoru\"]").click();
         switchTo().window(1);
         url = getWebDriver().getCurrentUrl();
@@ -61,7 +61,7 @@ public class lesson2_SomeTests {
         WebDriverRunner.closeWindow();
         switchTo().window(0);
 
-        // Перейти на вкладку "Недвижимость", проверить переход на нужный URL
+        // РџРµСЂРµР№С‚Рё РЅР° РІРєР»Р°РґРєСѓ "РќРµРґРІРёР¶РёРјРѕСЃС‚СЊ", РїСЂРѕРІРµСЂРёС‚СЊ РїРµСЂРµС…РѕРґ РЅР° РЅСѓР¶РЅС‹Р№ URL
         $("[data-id=\"realty\"]").click();
         switchTo().window(1);
         url = getWebDriver().getCurrentUrl();
@@ -70,79 +70,79 @@ public class lesson2_SomeTests {
         switchTo().window(0);
     }
 
-    // Выбор товара в Яндекс.Маркете
+    // Р’С‹Р±РѕСЂ С‚РѕРІР°СЂР° РІ РЇРЅРґРµРєСЃ.РњР°СЂРєРµС‚Рµ
     @Test
     void addToCompare() {
-        // Открыть страницу Яндекс.Маркет
+        // РћС‚РєСЂС‹С‚СЊ СЃС‚СЂР°РЅРёС†Сѓ РЇРЅРґРµРєСЃ.РњР°СЂРєРµС‚
         open("https://yandex.ru/market");
 
-        // Найти "Блендер Braun"
-        $(By.id("header-search")).setValue("блендер Braun").pressEnter();
+        // РќР°Р№С‚Рё "Р‘Р»РµРЅРґРµСЂ Braun"
+        $(By.id("header-search")).setValue("Р±Р»РµРЅРґРµСЂ Braun").pressEnter();
 
-        // На ввод капчи
+        // РќР° РІРІРѕРґ РєР°РїС‡Рё
         sleep(20000);
 
-        // Выполнить сортировку "по рейтингу"
+        // Р’С‹РїРѕР»РЅРёС‚СЊ СЃРѕСЂС‚РёСЂРѕРІРєСѓ "РїРѕ СЂРµР№С‚РёРЅРіСѓ"
         $("[data-autotest-id=\"quality\"]").click();
 
         // sleep(200000);
 
-        // Выбрать товар из списка
-        $(byTitle("Погружной блендер Braun MQ 3145")).click();
+        // Р’С‹Р±СЂР°С‚СЊ С‚РѕРІР°СЂ РёР· СЃРїРёСЃРєР°
+        $(byTitle("РџРѕРіСЂСѓР¶РЅРѕР№ Р±Р»РµРЅРґРµСЂ Braun MQ 3145")).click();
     }
 
     @Test
     void authAccount() {
-        // Открыть страницу Яндекса
+        // РћС‚РєСЂС‹С‚СЊ СЃС‚СЂР°РЅРёС†Сѓ РЇРЅРґРµРєСЃР°
         open("https://yandex.ru/");
 
-        // Пройти авторизацию
+        // РџСЂРѕР№С‚Рё Р°РІС‚РѕСЂРёР·Р°С†РёСЋ
         $("[data-statlog-showed=\"1\"]").click();
 
-        // Переход на вкладку авторизации
+        // РџРµСЂРµС…РѕРґ РЅР° РІРєР»Р°РґРєСѓ Р°РІС‚РѕСЂРёР·Р°С†РёРё
         switchTo().window(1);
 
-        // Пройти авторизацию
+        // РџСЂРѕР№С‚Рё Р°РІС‚РѕСЂРёР·Р°С†РёСЋ
         $("#passp-field-login").setValue("test.abramova");
         $("[type=\"submit\"]").click();
         $("#passp-field-passwd").setValue("QaAbramova");
         $("[type=\"submit\"]").click();
        // $("data-t=\"email_skip\"").click();
 
-        // Проверить успешную авторизацию
-        $(".mail-NestedList-Item-Name").shouldHave(text("Входящие"));
+        // РџСЂРѕРІРµСЂРёС‚СЊ СѓСЃРїРµС€РЅСѓСЋ Р°РІС‚РѕСЂРёР·Р°С†РёСЋ
+        $(".mail-NestedList-Item-Name").shouldHave(text("Р’С…РѕРґСЏС‰РёРµ"));
     }
 
     @Test
     void searchWithHint() {
-        // Открыть страницу Яндекса
+        // РћС‚РєСЂС‹С‚СЊ СЃС‚СЂР°РЅРёС†Сѓ РЇРЅРґРµРєСЃР°
         open("https://yandex.ru/");
 
-        // Сохранить текст подсказки
+        // РЎРѕС…СЂР°РЅРёС‚СЊ С‚РµРєСЃС‚ РїРѕРґСЃРєР°Р·РєРё
         String text = $("[tabindex=\"0\"]").getText();
 
-        // Нажать на подсказку
+        // РќР°Р¶Р°С‚СЊ РЅР° РїРѕРґСЃРєР°Р·РєСѓ
         $(".home-link.home-link_pseudo_yes.home-link_gray_yes.home-arrow__sample-link").click();
 
-        // Проверить подстановку подсказки
+        // РџСЂРѕРІРµСЂРёС‚СЊ РїРѕРґСЃС‚Р°РЅРѕРІРєСѓ РїРѕРґСЃРєР°Р·РєРё
         $(".input__control.mini-suggest__input").shouldHave(value(text));
     }
 
     @Test
     void switchCity() {
-        // Открыть страницу Яндекса
+        // РћС‚РєСЂС‹С‚СЊ СЃС‚СЂР°РЅРёС†Сѓ РЇРЅРґРµРєСЃР°
         open("https://yandex.ru/");
 
-        // Перейти в настройки
+        // РџРµСЂРµР№С‚Рё РІ РЅР°СЃС‚СЂРѕР№РєРё
         $("[data-statlog=\"head.settings\"]").click();
-        $("[aria-label=\"Изменить город\"]").click();
+        $("[aria-label=\"РР·РјРµРЅРёС‚СЊ РіРѕСЂРѕРґ\"]").click();
 
-        // Изменить город
+        // РР·РјРµРЅРёС‚СЊ РіРѕСЂРѕРґ
         $("#city__front-input").clear();
-        $("#city__front-input").setValue("Химки").pressEnter();
-        
-        // Проверить, что отображается карта выбранного города
-        $(".region__cityname_text").shouldHave(text("Химок"));
+        $("#city__front-input").setValue("РҐРёРјРєРё").pressEnter();
+
+        // РџСЂРѕРІРµСЂРёС‚СЊ, С‡С‚Рѕ РѕС‚РѕР±СЂР°Р¶Р°РµС‚СЃСЏ РєР°СЂС‚Р° РІС‹Р±СЂР°РЅРЅРѕРіРѕ РіРѕСЂРѕРґР°
+        $(".region__cityname_text").shouldHave(text("РҐРёРјРѕРє"));
 
     }
 
