@@ -12,6 +12,7 @@ import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverRunner.*;
 
+
 public class lesson2_SomeTests {
 
     // Проверка работа ссылок на сервисы Яндекса
@@ -71,7 +72,7 @@ public class lesson2_SomeTests {
 
     // Выбор товара в Яндекс.Маркете
     @Test
-    void addToCompare() {
+    void openProductCard() {
         // Открыть страницу Яндекс.Маркет
         open("https://yandex.ru/market");
 
@@ -88,9 +89,13 @@ public class lesson2_SomeTests {
 
         // Выбрать товар из списка
         $(byTitle("Погружной блендер Braun MQ 3145")).click();
+
+        // Проверить, что товар на странице
+        $("html").shouldHave(text("Погружной блендер Braun MQ 3145"));
         WebDriverRunner.closeWindow();
     }
 
+    // Авторизация Яндекс
     @Test
     void authAccount() {
         // Открыть страницу Яндекса
@@ -114,6 +119,7 @@ public class lesson2_SomeTests {
         WebDriverRunner.closeWindow();
     }
 
+    // Поиск с помощью подсказки
     @Test
     void searchWithHint() {
         // Открыть страницу Яндекса
@@ -153,6 +159,5 @@ public class lesson2_SomeTests {
         assert url.equals("https://yandex.ru/");
         WebDriverRunner.closeWindow();
     }
-
 
 }
