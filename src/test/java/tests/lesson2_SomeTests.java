@@ -67,7 +67,6 @@ public class lesson2_SomeTests {
         url = getWebDriver().getCurrentUrl();
         assert url.equals("https://realty.yandex.ru/?from=yatab&utm_source=tab-yandex-glavnaya&utm_content=web_yatab");
         WebDriverRunner.closeWindow();
-        switchTo().window(0);
     }
 
     // Выбор товара в Яндекс.Маркете
@@ -89,6 +88,7 @@ public class lesson2_SomeTests {
 
         // Выбрать товар из списка
         $(byTitle("Погружной блендер Braun MQ 3145")).click();
+        WebDriverRunner.closeWindow();
     }
 
     @Test
@@ -111,6 +111,7 @@ public class lesson2_SomeTests {
 
         // Проверить успешную авторизацию
         $(".mail-NestedList-Item-Name").shouldHave(text("Входящие"));
+        WebDriverRunner.closeWindow();
     }
 
     @Test
@@ -128,22 +129,29 @@ public class lesson2_SomeTests {
         $(".input__control.mini-suggest__input").shouldHave(value(text));
     }
 
+    // Отключение персонифицированной рекламы
     @Test
-    void switchCity() {
+    void turnAdSettingsOff() {
         // Открыть страницу Яндекса
         open("https://yandex.ru/");
 
-        // Перейти в настройки
+        // Перейти в настройки рекламы
         $("[data-statlog=\"head.settings\"]").click();
-        $("[aria-label=\"Изменить город\"]").click();
+        $("[aria-label=\"Настройки портала\"]").click();
+        $("[data-statlog=\"tabs.adv\"]").click();
 
-        // Изменить город
-        $("#city__front-input").clear();
-        $("#city__front-input").setValue("Химки").pressEnter();
+        // Снять галочки учета рекламы
+        $(byName("yes_interest_ad")).click();
+        $(byName("yes_geo_ad")).click();
+        $("[type=\"submit\"]").click();
 
-        // Проверить, что отображается карта выбранного города
-        $(".region__cityname_text").shouldHave(text("Химок"));
+        // Задержка для редиректа (вопрос, как её избежать?)
+        sleep(400);
 
+        // Проверить редирект на главную страницу
+        String url = getWebDriver().getCurrentUrl();
+        assert url.equals("https://yandex.ru/");
+        WebDriverRunner.closeWindow();
     }
 
 
