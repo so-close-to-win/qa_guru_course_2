@@ -3,6 +3,7 @@ package tests;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,6 +12,7 @@ import org.openqa.selenium.By;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 import static io.qameta.allure.Allure.step;
+import static jdk.nashorn.internal.objects.NativeMath.random;
 
 
 class LambdaAndSteps {
@@ -25,8 +27,13 @@ class LambdaAndSteps {
 
     private BaseSteps steps = new BaseSteps();
 
+    @AfterEach
+    public void closeDriver() {
+        closeWebDriver();
+    }
 
     @Test
+    @DisplayName("Создание задачи по степам")
     void createIssueViaSteps() {
         Configuration.baseUrl = GITHUB_URL;
         steps.openGitHub(GITHUB_URL);
@@ -76,6 +83,7 @@ class ApiTests {
     private String GITHUB_REPOSITORY = "/so-close-to-win/qa_guru_course_2/issues";
     private String ISSUE_NAME_STEPS = "Создание по степам3";
     private String ISSUE_NAME_LAMBDA = "Создание по лямбде";
+    private String TOKEN = "8a89ad4135d142ca1acad8d4ad72d4ccd801eeca"
 
     private BaseSteps steps = new BaseSteps();
 
@@ -93,8 +101,10 @@ class ApiTests {
         steps.openGitHub(GITHUB_URL);
         steps.AuthUser(GITHUB_LOGIN, USERNAME, PASSWORD);
         steps.openRepository(GITHUB_REPOSITORY);
+        ISSUE_NAME_STEPS = ISSUE_NAME_STEPS + random(188);
         steps.createNewIssue(ISSUE_NAME_STEPS);
-        steps.assertIssueName(ISSUE_NAME_STEPS);
+
+        steps.assertIssueWithAPI(TOKEN, GITHUB_REPOSITORY, ISSUE_NAME_STEPS);
     }
 
 

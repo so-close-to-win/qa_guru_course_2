@@ -1,15 +1,14 @@
 package tests;
 
-import com.codeborne.selenide.Condition;
 import io.qameta.allure.Step;
 import io.qameta.allure.restassured.AllureRestAssured;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
-import static io.qameta.allure.Allure.parameter;
+import static com.codeborne.selenide.Selenide.*;
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 
 public class BaseSteps {
     @Step("Перейти на GitHub")
@@ -40,6 +39,25 @@ public class BaseSteps {
     @Step("Проверить наличие задачи с именем")
     public void assertIssueName(String ISSUE_NAME) {
         $("span.js-issue-title").shouldHave(text(ISSUE_NAME));
+    }
+
+    @Step("Проверить наличие задачи по апи")
+    public Issue assertIssueWithAPI(String TOKEN, String REPOSITORY, String ISSUE_NUMBER) {
+        Issue issue = new Issue();
+        int issueNum = Integer
+                .parseInt($(".js-issue-title").sibling(0).getText());
+        issue = given()
+                .filter(new AllureRestAssured())
+                .header("Authorization", "token" + TOKEN)
+                .baseUri("https;//api.github.com")
+                .when()
+                .get("repos/" + REPOSITORY + "/issues/" + ISSUE_NUMBER)
+                .then()
+                .log()
+                .all()
+                .extract()
+                .as(Issue.class);
+        assertThat(issue);
     }
 
 }
