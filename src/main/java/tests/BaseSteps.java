@@ -8,6 +8,7 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.comparesEqualTo;
 
 
 public class BaseSteps {
@@ -42,22 +43,25 @@ public class BaseSteps {
     }
 
     @Step("Проверить наличие задачи по апи")
-    public Issue assertIssueWithAPI(String TOKEN, String REPOSITORY, String ISSUE_NUMBER) {
-        Issue issue = new Issue();
+    public Issue assertIssueWithAPI(String TOKEN, String REPOSITORY) {
+        final Issue issue = new Issue();
         int issueNum = Integer
-                .parseInt($(".js-issue-title").sibling(0).getText());
-        issue = given()
-                .filter(new AllureRestAssured())
-                .header("Authorization", "token" + TOKEN)
-                .baseUri("https;//api.github.com")
-                .when()
-                .get("repos/" + REPOSITORY + "/issues/" + ISSUE_NUMBER)
-                .then()
-                .log()
-                .all()
-                .extract()
-                .as(Issue.class);
-        assertThat(issue);
+                .parseInt($(".js-issue-title").sibling(0).getText().replace("#", ""));
+        // @formatter:off
+        return given()
+                 .filter(new AllureRestAssured())
+                 .header("Authorization", "token" + TOKEN)
+                 .baseUri("https;//api.github.com")
+        .when()
+                 .get("https://github.com" + REPOSITORY + "/" + issueNum)
+        .then()
+                 .statusCode(200)
+                 .log()
+                 .all()
+        .extract()
+                 .as(Issue.class);
+        // @formatter:on
+
     }
 
 }

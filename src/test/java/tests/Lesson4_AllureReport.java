@@ -83,7 +83,7 @@ class ApiTests {
     private String GITHUB_REPOSITORY = "/so-close-to-win/qa_guru_course_2/issues";
     private String ISSUE_NAME_STEPS = "Создание по степам3";
     private String ISSUE_NAME_LAMBDA = "Создание по лямбде";
-    private String TOKEN = "8a89ad4135d142ca1acad8d4ad72d4ccd801eeca"
+    private String TOKEN = "8a89ad4135d142ca1acad8d4ad72d4ccd801eeca";
 
     private BaseSteps steps = new BaseSteps();
 
@@ -101,10 +101,10 @@ class ApiTests {
         steps.openGitHub(GITHUB_URL);
         steps.AuthUser(GITHUB_LOGIN, USERNAME, PASSWORD);
         steps.openRepository(GITHUB_REPOSITORY);
-        ISSUE_NAME_STEPS = ISSUE_NAME_STEPS + random(188);
+        ISSUE_NAME_STEPS = ISSUE_NAME_STEPS + random(8);
         steps.createNewIssue(ISSUE_NAME_STEPS);
 
-        steps.assertIssueWithAPI(TOKEN, GITHUB_REPOSITORY, ISSUE_NAME_STEPS);
+        steps.assertIssueWithAPI(TOKEN, GITHUB_REPOSITORY);
     }
 
 
